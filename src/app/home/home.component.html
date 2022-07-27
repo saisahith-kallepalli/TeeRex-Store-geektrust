@@ -179,70 +179,72 @@
 
       -->
       <div class="side-bar ps-3 pt-2" [formGroup]="sidebarControls">
-        <div class="">
-          <h1>Color</h1>
-          <section class="ps-3">
-            <h3 *ngFor="let color of colors">
-              <mat-checkbox
-                formArrayName="color"
-                [value]="color"
-                (change)="onClickColor($event)"
-                [checked]="sidebarControls.value.color.includes(color)"
-                >{{ color }}</mat-checkbox
-              >
-            </h3>
-          </section>
-        </div>
-        <div>
-          <h1>Gender</h1>
-          <section class="ps-3">
-            <h3>
-              <mat-checkbox
-                formArrayName="gender"
-                value="Men"
-                (change)="onClickGender($event)"
-                [checked]="sidebarControls.value.gender.includes('Men')"
-                >Men</mat-checkbox
-              >
-            </h3>
-            <h3>
-              <mat-checkbox
-                formArrayName="gender"
-                value="Women"
-                (change)="onClickGender($event)"
-                [checked]="sidebarControls.value.gender.includes('Women')"
-                >Women</mat-checkbox
-              >
-            </h3>
-          </section>
-        </div>
-        <div>
-          <h1>Price</h1>
-          <section class="ps-3">
-            <h3 *ngFor="let filter of price">
-              <mat-checkbox
-                formArrayName="price"
-                [value]="filter.value"
-                (change)="onClickPrice($event)"
-                [checked]="sidebarControls.value.price.includes(filter.value)"
-                >{{ filter.name }}</mat-checkbox
-              >
-            </h3>
-          </section>
-        </div>
-        <div>
-          <h1>Type</h1>
-          <section class="ps-3">
-            <h3 *ngFor="let type of types">
-              <mat-checkbox
-                formArrayName="type"
-                [value]="type"
-                (change)="onClickType($event)"
-                [checked]="sidebarControls.value.type.includes(type)"
-                >{{ type }}</mat-checkbox
-              >
-            </h3>
-          </section>
+        <div class="position-access">
+          <div class="">
+            <h1>Color</h1>
+            <section class="ps-3">
+              <h3 *ngFor="let color of colors">
+                <mat-checkbox
+                  formArrayName="color"
+                  [value]="color"
+                  (change)="onClickColor($event)"
+                  [checked]="sidebarControls.value.color.includes(color)"
+                  >{{ color }}</mat-checkbox
+                >
+              </h3>
+            </section>
+          </div>
+          <div>
+            <h1>Gender</h1>
+            <section class="ps-3">
+              <h3>
+                <mat-checkbox
+                  formArrayName="gender"
+                  value="Men"
+                  (change)="onClickGender($event)"
+                  [checked]="sidebarControls.value.gender.includes('Men')"
+                  >Men</mat-checkbox
+                >
+              </h3>
+              <h3>
+                <mat-checkbox
+                  formArrayName="gender"
+                  value="Women"
+                  (change)="onClickGender($event)"
+                  [checked]="sidebarControls.value.gender.includes('Women')"
+                  >Women</mat-checkbox
+                >
+              </h3>
+            </section>
+          </div>
+          <div>
+            <h1>Price</h1>
+            <section class="ps-3">
+              <h3 *ngFor="let filter of price">
+                <mat-checkbox
+                  formArrayName="price"
+                  [value]="filter.value"
+                  (change)="onClickPrice($event)"
+                  [checked]="sidebarControls.value.price.includes(filter.value)"
+                  >{{ filter.name }}</mat-checkbox
+                >
+              </h3>
+            </section>
+          </div>
+          <div>
+            <h1>Type</h1>
+            <section class="ps-3">
+              <h3 *ngFor="let type of types">
+                <mat-checkbox
+                  formArrayName="type"
+                  [value]="type"
+                  (change)="onClickType($event)"
+                  [checked]="sidebarControls.value.type.includes(type)"
+                  >{{ type }}</mat-checkbox
+                >
+              </h3>
+            </section>
+          </div>
         </div>
       </div>
     </div>
@@ -263,11 +265,13 @@
           <button
             type="button"
             class="btn btn-warning"
+            [disabled]="!item.quantity"
             (click)="onClickAddToCart(item)"
-            *ngIf="!hideTheCarts(item.id)"
+            *ngIf="!hideTheCarts(item.id) && item.quantity"
           >
-            Add to cart
-          </button>
+            Add to cart</button
+          ><br />
+          <p *ngIf="!item.quantity" class="text-danger">item is unavailable</p>
           <div *ngIf="hideTheCarts(item.id)" class="additional-container">
             <button
               class="btn btn-outline-info"
