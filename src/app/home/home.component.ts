@@ -42,21 +42,20 @@ export class HomeComponent implements OnInit {
         localStorage.setItem('products', JSON.stringify(data));
       });
   }
-  clearValue = () => {
-    this.value = '';
-    this.sidebarControls = this.formBuilder.group({
-      type: new FormArray([]),
-      price: new FormArray([]),
-      color: new FormArray([]),
-      gender: new FormArray([]),
-    });
-    const products = JSON.parse(localStorage.getItem('products') || '[]');
-    this.searchedItems = products.filter((each: any) =>
-      each.name.toLowerCase().includes(this.value.toLowerCase())
-    );
-    this.shoppingItems = this.searchedItems;
-  };
-
+  //used in components
+  valueOfCart(id: string) {
+    let exits = this.filterTheItemFromCart(id);
+    return exits[0]?.cart;
+  }
+  disableAddition(id: string) {
+    let exits = this.filterTheItemFromCart(id);
+    return exits[0]?.cart === exits[0]?.quantity;
+  }
+  hideTheCarts(id: string) {
+    let exits = this.filterTheItemFromCart(id);
+    return exits[0]?.cart > 0;
+  }
+  //reuseable functions
   filterTheOptions = () => {
     const selectedColors = this.sidebarControls.value.color;
     const selectedType = this.sidebarControls.value.type;
@@ -96,7 +95,27 @@ export class HomeComponent implements OnInit {
     }
     this.shoppingItems = data;
   };
+  filterTheItemFromCart = (id: string) => {
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    let exits = cart.filter((each: any) => each.id === id);
+    return exits;
+  };
 
+  //click on change function
+  clearValue = () => {
+    this.value = '';
+    this.sidebarControls = this.formBuilder.group({
+      type: new FormArray([]),
+      price: new FormArray([]),
+      color: new FormArray([]),
+      gender: new FormArray([]),
+    });
+    const products = JSON.parse(localStorage.getItem('products') || '[]');
+    this.searchedItems = products.filter((each: any) =>
+      each.name.toLowerCase().includes(this.value.toLowerCase())
+    );
+    this.shoppingItems = this.searchedItems;
+  };
   onChangeSearchProducts = (event: any) => {
     this.sidebarControls = this.formBuilder.group({
       type: new FormArray([]),
@@ -176,11 +195,6 @@ export class HomeComponent implements OnInit {
     //   this.shoppingItems = this.searchedItems;
     // }
   };
-  filterTheItemFromCart = (id: string) => {
-    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    let exits = cart.filter((each: any) => each.id === id);
-    return exits;
-  };
 
   onClickAddToCart = (item: any) => {
     let cart = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -199,18 +213,7 @@ export class HomeComponent implements OnInit {
     localStorage.setItem('cart', JSON.stringify(cart));
     this.cartItems = cart;
   };
-  valueOfCart(id: string) {
-    let exits = this.filterTheItemFromCart(id);
-    return exits[0]?.cart;
-  }
-  disableAddition(id: string) {
-    let exits = this.filterTheItemFromCart(id);
-    return exits[0]?.cart === exits[0]?.quantity;
-  }
-  hideTheCarts(id: string) {
-    let exits = this.filterTheItemFromCart(id);
-    return exits[0]?.cart > 0;
-  }
+
   reduceQuantity = (id: string) => {
     let cart = JSON.parse(localStorage.getItem('cart') || '[]');
     let exits = this.filterTheItemFromCart(id);
