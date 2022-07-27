@@ -40,7 +40,14 @@
       ></i
       >{{ "" }}
     </button>
-    <button class="btn btn-light" type="button" routerLink="/cart">
+    <button
+      [matBadge]="cartItems.length"
+      matBadgePosition="before"
+      matBadgeColor="accent"
+      class="btn btn-light"
+      type="button"
+      routerLink="/cart"
+    >
       <i nz-icon nzType="shopping-cart" nzTheme="outline"></i>{{ "" }}
     </button>
   </nav>

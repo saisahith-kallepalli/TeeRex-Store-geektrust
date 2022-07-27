@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
   value = '';
   shoppingItems: any = [];
   searchedItems: any = [];
+  cartItems: any = JSON.parse(localStorage.getItem('cart') || '[]');
   ngOnInit(): void {
     this.dataService
       .getData(
@@ -196,6 +197,7 @@ export class HomeComponent implements OnInit {
       cart.push({ ...item, cart: 1 });
     }
     localStorage.setItem('cart', JSON.stringify(cart));
+    this.cartItems = cart;
   };
   valueOfCart(id: string) {
     let exits = this.filterTheItemFromCart(id);
@@ -225,6 +227,7 @@ export class HomeComponent implements OnInit {
       });
     }
     localStorage.setItem('cart', JSON.stringify(cart));
+    this.cartItems = cart;
   };
   increaseQuantity = (id: string) => {
     let cart = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -240,5 +243,6 @@ export class HomeComponent implements OnInit {
       });
     }
     localStorage.setItem('cart', JSON.stringify(cart));
+    this.cartItems = cart;
   };
 }

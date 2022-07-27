@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-
+import { MatBadgeModule } from '@angular/material/badge';
 import { IconDefinition } from '@ant-design/icons-angular';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 // Import what you need. RECOMMENDED. ✔️
@@ -40,6 +40,7 @@ const icons: IconDefinition[] = [
     MatInputModule,
     MatIconModule,
     MatCheckboxModule,
+    MatBadgeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
