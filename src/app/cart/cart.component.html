@@ -1,0 +1,51 @@
+<div>
+  <nav class="navbar" id="navbar">
+    <h1>ＴΣΞＲΞＸ－ＳＴ♢ＲΣ</h1>
+    <h1>TΣΣЯΣX</h1>
+    <i class="bi bi-house-door-fill"></i>
+    <button class="btn btn-light" type="button" routerLink="/home">
+      <i class="bi bi-house-door-fill">Home</i>
+    </button>
+  </nav>
+  <div class="m-3">
+    <h2 class="fs-2 text-secondary">Shopping</h2>
+    <div>
+      <div class="item-decoration" *ngFor="let item of cart">
+        <img
+          aria-label="items"
+          [src]="item.imageURL"
+          [alt]="item.name"
+          [title]="item.name"
+        />
+        <div>
+          <h1>{{ item.name }}</h1>
+          <h1>₹{{ item.price }}</h1>
+        </div>
+        <div>
+          <div class="additional-container">
+            <button
+              class="btn btn-outline-info"
+              (click)="reduceQuantity(item.id)"
+              [disabled]="disableReduce(item.id)"
+            >
+              -
+            </button>
+            <h1 class="text-info">{{ valueOfCart(item.id) }}</h1>
+            <button
+              class="btn btn-outline-info"
+              (click)="increaseQuantity(item.id)"
+              [disabled]="disableAddition(item.id)"
+            >
+              +
+            </button>
+          </div>
+          <h1 class="text-dark">Total: ₹{{ item.cart * item.price }}</h1>
+        </div>
+        <button class="btn btn-outline-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+  <h1 class="fw-bold text-success ps-5 pb-5 fs-2">
+    GRAND TOTAL= ₹{{ grandTotal }}
+  </h1>
+</div>

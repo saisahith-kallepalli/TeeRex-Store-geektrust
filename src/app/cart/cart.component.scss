@@ -1,0 +1,63 @@
+$navBackgroundColor: #e0f0e6;
+$sideBarBackground: #e9e8a8;
+$navTextColor: #303030;
+$textColor: #5c5959;
+.navbar {
+  h1 {
+    margin: 0px;
+    font-weight: 600;
+  }
+  h1:nth-of-type(2) {
+    display: none;
+  }
+  h1:nth-of-type(1) {
+    display: block;
+  }
+  button {
+    font-weight: bold;
+    font-size: 20px;
+  }
+  width: 100vw;
+  position: relative;
+  background-color: $navBackgroundColor;
+  color: $navTextColor;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.item-decoration {
+  color: $textColor;
+  h1 {
+    font-family: system-ui;
+  }
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  border-radius: 20px;
+  margin: 50px;
+  width: 80vw;
+  background-color: $sideBarBackground;
+  img {
+    height: 150px;
+    width: 150px;
+    padding: 10px;
+  }
+  button {
+    height: 50px;
+    width: 75px;
+  }
+}
+.additional-container {
+  button {
+    height: 36px;
+    width: 36px;
+    font-weight: bolder;
+  }
+  h1 {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  display: flex;
+  justify-content: space-around;
+}

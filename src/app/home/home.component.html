@@ -1,0 +1,291 @@
+<div>
+  <nav class="navbar" id="navbar">
+    <h1>ＴΣΞＲΞＸ－ＳＴ♢ＲΣ</h1>
+    <h1>TΣΣЯΣX</h1>
+    <mat-form-field class="example-form-field" appearance="outline">
+      <input
+        placeholder="search here...."
+        matInput
+        type="search"
+        (change)="onChangeSearchProducts($event)"
+        [(ngModel)]="value"
+      />
+      <button
+        *ngIf="value"
+        class="mt-2"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="clearValue()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+      <button
+        *ngIf="value"
+        matSuffix
+        mat-icon-button
+        class="mb-2"
+        aria-label="Clear"
+        (click)="onChangeSearchProducts($event)"
+      >
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+    <button class="btn btn-light search-icon" type="button">
+      <i
+        nz-icon
+        nzType="search"
+        nzTheme="outline"
+        (click)="searchMobile = !searchMobile"
+      ></i
+      >{{ "" }}
+    </button>
+    <button class="btn btn-light" type="button" routerLink="/cart">
+      <i nz-icon nzType="shopping-cart" nzTheme="outline"></i>{{ "" }}
+    </button>
+  </nav>
+  <div class="container-down1">
+    <mat-form-field
+      class="example-form-field-mobile"
+      appearance="outline"
+      *ngIf="searchMobile"
+      [(ngModel)]="value"
+    >
+      <input
+        placeholder="search here...."
+        matInput
+        type="search"
+        (change)="onChangeSearchProducts($event)"
+        [(ngModel)]="value"
+      />
+
+      <button
+        *ngIf="value"
+        matSuffix
+        mat-icon-button
+        class="btn"
+        aria-label="Clear"
+        (click)="clearValue()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+      <button
+        *ngIf="value"
+        matSuffix
+        mat-icon-button
+        class="btn"
+        aria-label="Clear"
+        (click)="onChangeSearchProducts($event)"
+      >
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+    <button
+      class="btn btn-dark filter-button"
+      type="button"
+      (click)="filterMobile = !filterMobile"
+    >
+      Filter<i nz-icon nzType="filter" class="ms-auto" nzTheme="fill"></i>
+    </button>
+  </div>
+  <div class="body-container">
+    <div>
+      <!--
+
+
+
+        mobile Responsive sideBar
+
+
+
+
+      -->
+      <div
+        class="side-bar1 ps-3 pt-2"
+        [style.display]="filterMobile ? 'block' : 'none'"
+        [formGroup]="sidebarControls"
+      >
+        <div class="">
+          <h1>Color</h1>
+          <section class="ps-3">
+            <h3 *ngFor="let color of colors">
+              <mat-checkbox
+                formArrayName="color"
+                [value]="color"
+                (change)="onClickColor($event)"
+                [checked]="sidebarControls.value.color.includes(color)"
+                >{{ color }}</mat-checkbox
+              >
+            </h3>
+          </section>
+        </div>
+        <div>
+          <h1>Gender</h1>
+          <section class="ps-3">
+            <h3>
+              <mat-checkbox
+                formArrayName="gender"
+                value="Men"
+                (change)="onClickGender($event)"
+                [checked]="sidebarControls.value.gender.includes('Men')"
+                >Men</mat-checkbox
+              >
+            </h3>
+            <h3>
+              <mat-checkbox
+                formArrayName="gender"
+                value="Women"
+                (change)="onClickGender($event)"
+                [checked]="sidebarControls.value.gender.includes('Women')"
+                >Women</mat-checkbox
+              >
+            </h3>
+          </section>
+        </div>
+        <div>
+          <h1>Price</h1>
+          <section class="ps-3">
+            <h3 *ngFor="let filter of price">
+              <mat-checkbox
+                formArrayName="price"
+                [value]="filter.value"
+                (change)="onClickPrice($event)"
+                [checked]="sidebarControls.value.price.includes(filter.value)"
+                >{{ filter.name }}</mat-checkbox
+              >
+            </h3>
+          </section>
+        </div>
+        <div>
+          <h1>Type</h1>
+          <section class="ps-3">
+            <h3 *ngFor="let type of types">
+              <mat-checkbox
+                formArrayName="type"
+                [value]="type"
+                (change)="onClickType($event)"
+                [checked]="sidebarControls.value.type.includes(type)"
+                >{{ type }}</mat-checkbox
+              >
+            </h3>
+          </section>
+        </div>
+      </div>
+      <!--
+
+
+        Web Responsive sideBar
+
+
+      -->
+      <div class="side-bar ps-3 pt-2" [formGroup]="sidebarControls">
+        <div class="">
+          <h1>Color</h1>
+          <section class="ps-3">
+            <h3 *ngFor="let color of colors">
+              <mat-checkbox
+                formArrayName="color"
+                [value]="color"
+                (change)="onClickColor($event)"
+                [checked]="sidebarControls.value.color.includes(color)"
+                >{{ color }}</mat-checkbox
+              >
+            </h3>
+          </section>
+        </div>
+        <div>
+          <h1>Gender</h1>
+          <section class="ps-3">
+            <h3>
+              <mat-checkbox
+                formArrayName="gender"
+                value="Men"
+                (change)="onClickGender($event)"
+                [checked]="sidebarControls.value.gender.includes('Men')"
+                >Men</mat-checkbox
+              >
+            </h3>
+            <h3>
+              <mat-checkbox
+                formArrayName="gender"
+                value="Women"
+                (change)="onClickGender($event)"
+                [checked]="sidebarControls.value.gender.includes('Women')"
+                >Women</mat-checkbox
+              >
+            </h3>
+          </section>
+        </div>
+        <div>
+          <h1>Price</h1>
+          <section class="ps-3">
+            <h3 *ngFor="let filter of price">
+              <mat-checkbox
+                formArrayName="price"
+                [value]="filter.value"
+                (change)="onClickPrice($event)"
+                [checked]="sidebarControls.value.price.includes(filter.value)"
+                >{{ filter.name }}</mat-checkbox
+              >
+            </h3>
+          </section>
+        </div>
+        <div>
+          <h1>Type</h1>
+          <section class="ps-3">
+            <h3 *ngFor="let type of types">
+              <mat-checkbox
+                formArrayName="type"
+                [value]="type"
+                (change)="onClickType($event)"
+                [checked]="sidebarControls.value.type.includes(type)"
+                >{{ type }}</mat-checkbox
+              >
+            </h3>
+          </section>
+        </div>
+      </div>
+    </div>
+    <div class="display-items">
+      <h1 *ngIf="!shoppingItems.length" class="noData">
+        No Items Found Search or Filter for Different
+      </h1>
+      <div class="box-size-item" *ngFor="let item of shoppingItems">
+        <img
+          aria-label="items"
+          [src]="item.imageURL"
+          [alt]="item.name"
+          [title]="item.name"
+        />
+        <h1 class="title-fit">{{ item.name }}</h1>
+        <div class="box-price-cart">
+          <h1>₹{{ item.price }}</h1>
+          <button
+            type="button"
+            class="btn btn-warning"
+            (click)="onClickAddToCart(item)"
+            *ngIf="!hideTheCarts(item.id)"
+          >
+            Add to cart
+          </button>
+          <div *ngIf="hideTheCarts(item.id)" class="additional-container">
+            <button
+              class="btn btn-outline-info"
+              (click)="reduceQuantity(item.id)"
+            >
+              -
+            </button>
+            <h1 class="text-info">{{ valueOfCart(item.id) }}</h1>
+            <button
+              class="btn btn-outline-info"
+              (click)="increaseQuantity(item.id)"
+              [disabled]="disableAddition(item.id)"
+            >
+              +
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
