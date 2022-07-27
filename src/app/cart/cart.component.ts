@@ -63,6 +63,12 @@ export class CartComponent implements OnInit {
     let exits = this.filterTheItemFromCart(id);
     return exits[0]?.cart === 1;
   }
+  onDelete = (id: string) => {
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    cart = cart.filter((each: any) => each.id !== id);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    this.cart = cart;
+  };
   get grandTotal() {
     let cart = JSON.parse(localStorage.getItem('cart') || '[]');
     let total = 0;

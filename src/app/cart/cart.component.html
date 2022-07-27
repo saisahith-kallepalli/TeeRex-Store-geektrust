@@ -41,11 +41,20 @@
           </div>
           <h1 class="text-dark">Total: ₹{{ item.cart * item.price }}</h1>
         </div>
-        <button class="btn btn-outline-danger">Delete</button>
+        <button class="btn btn-outline-danger" (click)="onDelete(item.id)">
+          Delete
+        </button>
       </div>
     </div>
   </div>
-  <h1 class="fw-bold text-success ps-5 pb-5 fs-2">
+
+  <h1 class="fw-bold text-success ps-5 pb-5 fs-2" *ngIf="!cart.length">
+    Go For Shopping
+    <span
+      ><button class="btn btn-info" routerLink="/home">Shopping</button></span
+    >
+  </h1>
+  <h1 class="fw-bold text-success ps-5 pb-5 fs-2" *ngIf="cart.length">
     GRAND TOTAL= ₹{{ grandTotal }}
   </h1>
 </div>
